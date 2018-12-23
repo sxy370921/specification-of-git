@@ -160,3 +160,60 @@ $ git remote rm paul
 $ git remote
 origin
 ```
+
+## fetch和pull指令的区别
+
+两者具体的区别
+### fetch 
+Git中的fetch命令是将远程分支的最新内容拉到了本地，但不立即将远程分支的变更合并到本地分支上。当我们执行完fetch命令后，在执行git branch命令会发现此时后本地多了一个FETCH_HEAD的分支。我们可以checkout到该分支查看远程分支的最新内容。以便于我们有机会查看远程分支都做了什么改动。 
+当我们检查完成后在checkout回本地分支执行merge命令进行合并。合并后如果出现冲突则需要我们手动解决冲突，然后在commit一次。
+
+### pull 
+pull的相当于fetch和merge的这两步操作，Git底层帮我们实现了：
+
+```
+git fetch origin master
+git merge FETCH_HEAD
+```
+
+如果存在冲突，同样需要我们自己手动解决冲突，解决完成后再一次进行commit操作。
+
+### Tip
+
+Tip-1: 理解git fetch的关键是理解FETCH_HEAD，FETCH_HEAD指的是：某个分支在服务器上的最新状态。
+
+Tip-2：在进行 fetch 操作时可能存在2种情况：
+
+1. 如果没有显示地指定远程分支，则远程的master分支将作为默认的FETCH_HEAD。
+
+   ```
+   git fetch origin
+   ```
+
+   相当于
+
+   ```
+   git fetch origin master
+   ```
+
+2. 如果指定了远程分支，则将指定的远程分支作为 FETCG_HEAD。如：
+
+   ```
+   git fetch origin dev
+   ```
+
+设定当前分支的 FETCG_HEAD 为远程服务器的dev分支。相当于git pull origin dev的第一步（但并不会在本地创建新的分支）。
+
+### 使用Fetch命令来嗅探远程分支是否存在
+例如我们使用fetch命令来测试远程分支dev是否存在。
+
+```
+git fetch origin dev :local_branch
+```
+
+上面这个命令的执行过程如下:
+
+首先执行上面的fetch操作
+使用远程dev分支在本地创建local_branch分支（但不会切换到该分支）
+
+如果本地不存在 local_branch 分支，则会自动创建一个新的 local_branch 分支; 如果存在 local_branch 分支，并且是fast forward，则会自动合并这2个分支，否则进行任何操作。！
