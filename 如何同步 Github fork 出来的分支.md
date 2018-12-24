@@ -1,8 +1,6 @@
 # 如何同步 Github fork 出来的分支
 
-发表于 2015-10-12   |   分类于 [github ](https://jinlong.github.io/categories/github/)  |  
 
-原先一直有个疑惑， Github fork 出来的项目，我已经做了部分修改，由于某些原因，无法提交 Pull Request，可是想把原项目的最近更新代码合并进来怎么办？google 了一下才茅塞顿开，年纪大了，这里记录一下吧。
 
 两种方式：
 

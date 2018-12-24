@@ -1,4 +1,4 @@
-# Git更新远程仓库代码到本地 git fetch
+# Git更新远程仓库代码到本地 
 
 当我们在多台电脑上开发一个项目的时候，需要经常修改提交内容并在另一台电脑上更新远程最新的代码，今天看了一下如何从远程代码仓库获取更新到本地，总结了一下网上的文章，采用如下的方式比较简单。
 
@@ -12,6 +12,7 @@
 
 ```
 $ git remote -v
+
 origin  git@github.com:username``/Animations``.git (fetch)``origin  git@github.com:username``/Animations``.git (push)`
 ```
 
@@ -23,6 +24,7 @@ origin  git@github.com:username``/Animations``.git (fetch)``origin  git@github.c
 
 ```
 $ git fetch origin master:temp
+
 remote: Counting objects: 18, ``done``.``remote: Compressing objects: 100% (6``/6``), ``done``.``remote: Total 11 (delta 3), reused 0 (delta 0)``Unpacking objects: 100% (11``/11``), ``done``.``From github.com:username``/Animations`` ``* [new branch]      master     -> temp``   ``c07bdc7..40f902d  master     -> origin``/master`
 ```
 
@@ -34,6 +36,7 @@ remote: Counting objects: 18, ``done``.``remote: Compressing objects: 100% (6``/
 
 ```
 $ git diff temp
+
 diff --git a/README.md b/README.md``deleted file mode ``100644``index 76699ed..``0000000``--- a/README.md``+++ /dev/``null``@@ -``1``,``6` `+``0``,``0` `@@``-Animations``-==========``-``。。。`
 ```
 
@@ -45,6 +48,7 @@ diff --git a/README.md b/README.md``deleted file mode ``100644``index 76699ed..`
 
 ```
 $ git merge temp
+
 Updating c07bdc7..40f902d``Fast-forward`` ``README.md                                                  | 6 ++++++`` ``src``/cn/exercise/animations/MainActivity``.java | 4 ++--`` ``2 files changed, 8 insertions(+), 2 deletions(-)`` ``create mode 100644 README.md`
 ```
 
@@ -56,6 +60,7 @@ Updating c07bdc7..40f902d``Fast-forward`` ``README.md                           
 
 ```
 $ git branch -d temp
+
 Deleted branch temp (was 40f902d).`
 ```
 
