@@ -11,7 +11,8 @@
 使用如下命令可以查看远程仓库（我这里有一个origin仓库）
 
 ```
-`$ git remote -``v``origin  git@github.com:username``/Animations``.git (fetch)``origin  git@github.com:username``/Animations``.git (push)`
+$ git remote -v
+origin  git@github.com:username``/Animations``.git (fetch)``origin  git@github.com:username``/Animations``.git (push)`
 ```
 
  
@@ -21,7 +22,8 @@
 使用如下命令可以在本地新建一个temp分支，并将远程origin仓库的master分支代码下载到本地temp分支
 
 ```
-`$ git fetch origin master:temp``remote: Counting objects: 18, ``done``.``remote: Compressing objects: 100% (6``/6``), ``done``.``remote: Total 11 (delta 3), reused 0 (delta 0)``Unpacking objects: 100% (11``/11``), ``done``.``From github.com:username``/Animations`` ``* [new branch]      master     -> temp``   ``c07bdc7..40f902d  master     -> origin``/master`
+$ git fetch origin master:temp
+remote: Counting objects: 18, ``done``.``remote: Compressing objects: 100% (6``/6``), ``done``.``remote: Total 11 (delta 3), reused 0 (delta 0)``Unpacking objects: 100% (11``/11``), ``done``.``From github.com:username``/Animations`` ``* [new branch]      master     -> temp``   ``c07bdc7..40f902d  master     -> origin``/master`
 ```
 
  
@@ -31,7 +33,8 @@
 使用如下命令来比较本地代码与刚刚从远程下载下来的代码的区别：
 
 ```
-`$ git diff temp``diff --git a/README.md b/README.md``deleted file mode ``100644``index 76699ed..``0000000``--- a/README.md``+++ /dev/``null``@@ -``1``,``6` `+``0``,``0` `@@``-Animations``-==========``-``。。。`
+$ git diff temp
+diff --git a/README.md b/README.md``deleted file mode ``100644``index 76699ed..``0000000``--- a/README.md``+++ /dev/``null``@@ -``1``,``6` `+``0``,``0` `@@``-Animations``-==========``-``。。。`
 ```
 
  
@@ -41,7 +44,8 @@
 对比区别之后，如果觉得没有问题，可以使用如下命令进行代码合并：
 
 ```
-`$ git merge temp``Updating c07bdc7..40f902d``Fast-forward`` ``README.md                                                  | 6 ++++++`` ``src``/cn/exercise/animations/MainActivity``.java | 4 ++--`` ``2 files changed, 8 insertions(+), 2 deletions(-)`` ``create mode 100644 README.md`
+$ git merge temp
+Updating c07bdc7..40f902d``Fast-forward`` ``README.md                                                  | 6 ++++++`` ``src``/cn/exercise/animations/MainActivity``.java | 4 ++--`` ``2 files changed, 8 insertions(+), 2 deletions(-)`` ``create mode 100644 README.md`
 ```
 
  
@@ -51,7 +55,8 @@
 如果temp分支不想要保留，可以使用如下命令删除该分支：
 
 ```
-`$ git branch -d temp``Deleted branch temp (was 40f902d).`
+$ git branch -d temp
+Deleted branch temp (was 40f902d).`
 ```
 
 如果该分支的代码之前没有merge到本地，那么删除该分支会报错，可以使用git branch -D temp强制删除该分支。
@@ -79,12 +84,26 @@ git pull origin develop
 
 通常，git会将本地库分支与远程分支之间建立一种追踪关系。比如，在git clone的时候，所有本地分支默认与远程库的同名分支建立追踪关系。也就是说，本地的master分支自动追踪origin/master分支。因此，如果当前处于本地develop分支上，并且本地develop分支与远程的develop分支有追踪关系，那么远程的分支名可以省略：
 
+```
 git pull origin
+```
 
 其实，git pull 命令等同于先做了git fetch ，再做了git merge。即：
+
+```
 git fetch origin develop
 git checkout develop
 git merge origin/develop
+```
+
+或者
+
+```
+git fetch origin master:tmp
+git diff tmp 
+git merge tmp
+git branch -d tmp
+```
 
 好多人不建议使用git pull，喜欢自己merge，以便万一自动merge出错的时候可以解决冲突
 

@@ -301,3 +301,13 @@ Git也允许手动建立追踪关系。
 > ```javascript
 > $ git push origin --tags
 > ```
+
+### 删除远程分支
+
+假设你已经通过远程分支做完所有的工作了 - 也就是说你和你的协作者已经完成了一个特性并且将其合并到了远程仓库的 `master` 分支（或任何其他稳定代码分支）。 可以运行带有 `--delete` 选项的 `git push` 命令来删除一个远程分支。 如果想要从服务器上删除 `serverfix` 分支，运行下面的命令：
+
+```console
+$ git push origin --delete serverfix
+To https://github.com/schacon/simplegit
+ - [deleted]         serverfix
+```

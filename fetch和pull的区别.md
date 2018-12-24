@@ -5,7 +5,9 @@
 
 
 ```
-`git fetch origin master``git log -p master origin``/master``git merge origin``/master`
+git fetch origin master
+git log -p master origin/master
+git merge origin/master
 ```
 
 以上命令的含义：
@@ -19,7 +21,9 @@
 上述过程其实可以用以下更清晰的方式来进行：
 
 ```
-`git fetch origin master:tmp``git ``diff` `tmp``git merge tmp`
+git fetch origin master:tmp
+git diff tmp
+git merge tmp
 ```
 
 从远程获取最新的版本到本地的 tmp 分支上，之后再进行 比较、合并
@@ -29,7 +33,7 @@
 
 
 ```
-`git pull origin master`
+git pull origin master
 ```
 
 上述命令其实相当于 `git fetch + git merge`，
